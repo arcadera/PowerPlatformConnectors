@@ -83,8 +83,8 @@
                       "x-ms-visibility": "important"
                     },
                     "Base64Data": {
-                      "title": "Base64 Data, alternative to byte array. Either Data or Base64Data parameter must be used",
-                      "description": "File contents, \"Base64\" encoded.",
+                      "title": "Base64 Data",
+                      "description": "File contents, \"Base64\" encoded. Alternative to byte array. Either Data or Base64Data parameter must be used",
                       "type": "string"
                     },
                     "AdditionalFields": {
@@ -401,21 +401,21 @@
                       "x-ms-visibility": "advanced"
                     },
                     "ResponsiblePersonEmail": {
-                      "title": "Responsible person email",
+                      "title": "Responsible Person Email",
                       "description": "Responsible person for the case.",
                       "type": "string",
                       "x-ms-visibility": "advanced"
                     },
                     "ResponsiblePersonRecno": {
                       "format": "int32",
-                      "title": "Responsible Person Recno.",
+                      "title": "Responsible Person Recno",
                       "description": "Refers to a valid contact recno. Alternative to Responsible person email.",
                       "type": "integer",
                       "x-ms-visibility": "advanced"
                     },
                     "ResponsibleEnterpriseRecno": {
                       "format": "int32",
-                      "title": "Responsible Enterprise Recno.",
+                      "title": "Responsible Enterprise Recno",
                       "description": "Looks up enterprise based on recno. Alternative to Responsible person email and recno.",
                       "type": "integer",
                       "x-ms-visibility": "advanced"
