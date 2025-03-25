@@ -16,7 +16,7 @@
     "https"
   ],
   "consumes": [
-  
+
   ],
   "produces": [
     "application/json"
@@ -27,58 +27,89 @@
         "summary": "Create File",
         "description": "This operation is used to create a file in Public 360.",
         "operationId": "CreateFile",
+        "consumes": [
+          "*/*"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "hosturl",
             "in": "query",
+            "name": "hosturl",
+            "description": "Host URL to point to the public 360 solution.",
             "required": true,
             "type": "string",
-            "description": "Host URL to point to the public 360 solution.",
             "x-ms-summary": "Host URL"
           },
           {
-            "name": "body",
             "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
+              "required": [
+                "parameter"
+              ],
               "type": "object",
               "properties": {
                 "parameter": {
-                  "type": "object",
-                  "properties": {
-                    "Title": {
-                      "type": "string",
-                      "description": "Title for the file.",
-                      "title": "Title"
-                    },
-                    "DocumentNumber": {
-                      "type": "string",
-                      "description": "Document Number of the document this file belongs to.",
-                      "title": "Document Number"
-                    },
-                    "Format": {
-                      "type": "string",
-                      "description": "File type to be passed during the creation of file (e.g. \"txt\" , \"htm\").",
-                      "title": "Format"
-                    },
-                    "Base64Data": {
-                      "type": "string",
-                      "description": "File contents that can be sent. Must be \"Base64\" encoded.",
-                      "title": "Data"
-                    }
-                  },
                   "description": "parameter",
                   "required": [
-                    "Base64Data",
                     "DocumentNumber",
                     "Format",
                     "Title"
-                  ]
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "Title": {
+                      "title": "Title",
+                      "description": "Title for the file.",
+                      "type": "string"
+                    },
+                    "DocumentNumber": {
+                      "title": "Document Number",
+                      "description": "Document Number of the document this file belongs to.",
+                      "type": "string"
+                    },
+                    "Format": {
+                      "title": "Format",
+                      "description": "File type to be passed during the creation of file (e.g. \"txt\" , \"htm\").",
+                      "type": "string"
+                    },
+                    "Data": {
+                      "title": "Data (Byte array)",
+                      "description": "File contents in the form of byte array.",
+                      "type": "string",
+                      "x-ms-visibility": "important"
+                    },
+                    "Base64Data": {
+                      "title": "Base64 Data, alternative to byte array. Either Data or Base64Data parameter must be used",
+                      "description": "File contents, \"Base64\" encoded.",
+                      "type": "string"
+                    },
+                    "AdditionalFields": {
+                      "title": "Additional Fields",
+                      "description": "Additional Public 360 fields which are not currently included in the parameters of the action.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Name": {
+                            "title": "Name",
+                            "description": "The name of the field. This name is the name in the 360° meta model (Not always the same as seen in 360° GUI.)",
+                            "type": "string"
+                          },
+                          "Value": {
+                            "title": "Value",
+                            "description": "The string value to be set in the field.",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
-              },
-              "required": [
-                "parameter"
-              ]
+              }
             }
           }
         ],
@@ -89,21 +120,21 @@
               "type": "object",
               "properties": {
                 "Recno": {
-                  "type": "integer",
                   "format": "int32",
-                  "description": "Recno"
+                  "description": "Recno",
+                  "type": "integer"
                 },
                 "Successful": {
-                  "type": "boolean",
-                  "description": "Successful"
+                  "description": "Successful",
+                  "type": "boolean"
                 },
                 "ErrorMessage": {
-                  "type": "string",
-                  "description": "ErrorMessage"
+                  "description": "ErrorMessage",
+                  "type": "string"
                 },
                 "ErrorDetails": {
-                  "type": "string",
-                  "description": "ErrorDetails"
+                  "description": "ErrorDetails",
+                  "type": "string"
                 }
               }
             }
@@ -114,7 +145,8 @@
           "502": {
             "description": "Bad Gateway"
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     },
     "/Biz/v2/api/call/SI.Data.RPC/SI.Data.RPC/DocumentService/CreateDocument": {
@@ -122,82 +154,83 @@
         "summary": "Create Document",
         "description": "This operation is used to create a document in Public 360.",
         "operationId": "CreateDocument",
+        "consumes": [
+          "*/*"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "hosturl",
             "in": "query",
+            "name": "hosturl",
+            "description": "Host URL to point to the public 360 solution.",
             "required": true,
             "type": "string",
-            "description": "Host URL to point to the public 360 solution.",
             "x-ms-summary": "Host URL"
           },
           {
-            "name": "body",
             "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
+              "required": [
+                "parameter"
+              ],
               "type": "object",
               "properties": {
                 "parameter": {
+                  "description": "parameter",
+                  "required": [
+                    "Title"
+                  ],
                   "type": "object",
                   "properties": {
-                    "CaseNumber": {
-                      "type": "string",
-                      "description": "Case Number of the case this document belongs to.",
-                      "title": "Case Number"
-                    },
                     "Title": {
-                      "type": "string",
+                      "title": "Title",
                       "description": "Title for the document.",
-                      "title": "Title"
+                      "type": "string"
+                    },
+                    "CaseNumber": {
+                      "title": "Case Number",
+                      "description": "Case Number of the case this document belongs to.",
+                      "type": "string",
+                      "x-ms-visibility": "important"
+                    },
+                    "DefaultValueSet": {
+                      "title": "Default Value Set",
+                      "description": "Set of defined values for Document entities which are used to create document with those values as default if not passed",
+                      "type": "string",
+                      "x-ms-visibility": "important"
+                    },
+                    "UnofficialTitle": {
+                      "title": "Unofficial title",
+                      "description": "Unofficial title for the document.",
+                      "x-ms-visibility": "advanced",
+                      "type": "string"
+                    },
+                    "ResponsiblePersonEmail": {
+                      "title": "Responsible Person Email",
+                      "description": "Responsible person for the document.",
+                      "x-ms-visibility": "advanced",
+                      "type": "string"
                     },
                     "Category": {
-                      "type": "string",
-                      "description": "Category for the document.",
                       "title": "Category",
-                      "enum": [
-                        "recno:60005",
-                        "recno:113",
-                        "recno:110",
-                        "recno:111",
-                        "recno:114",
-                        "recno:115"
-                      ],
-                      "x-ms-enum-values": [
-                        {
-                          "displayName": "Internal memo without follow-up",
-                          "value": "recno:60005"
-                        },
-                        {
-                          "displayName": "Internal memo with follow-up",
-                          "value": "recno:113"
-                        },
-                        {
-                          "displayName": "Incoming document",
-                          "value": "recno:110"
-                        },
-                        {
-                          "displayName": "Outbound document",
-                          "value": "recno:111"
-                        },
-                        {
-                          "displayName": "Incoming e-mail",
-                          "value": "recno:114"
-                        },
-                        {
-                          "displayName": "Outbound e-mail",
-                          "value": "recno:115"
-                        }
-                      ]
+                      "description": "Category for the document. F.ex., recno:60005 for Internal memo without follow-up",
+                      "type": "string",
+                      "x-ms-visibility": "advanced",
+                      "example": "recno:60005"
                     },
                     "Status": {
-                      "type": "string",
-                      "description": "Status for the document.",
                       "title": "Status",
+                      "description": "Status for the document.",
+                      "x-ms-visibility": "advanced",
                       "enum": [
                         "recno:1",
                         "recno:6"
                       ],
+                      "type": "string",
                       "x-ms-enum-values": [
                         {
                           "displayName": "Reserved",
@@ -210,52 +243,60 @@
                       ]
                     },
                     "Archive": {
-                      "type": "string",
+                      "title": "Archive",
                       "description": "The Document archive for this document",
-                      "title": "Archive"
-                    },
-                    "DefaultValueSet": {
                       "type": "string",
-                      "description": "Set of defined values for Document entities which are used to create document with those values as default if not passed",
-                      "title": "Default Value Set"
+                      "x-ms-visibility": "advanced"
                     },
                     "Notes": {
-                      "type": "string",
+                      "title": "Notes",
                       "description": "Notes for the document.",
-                      "title": "Notes"
+                      "type": "string",
+                      "x-ms-visibility": "advanced"
                     },
                     "Contacts": {
+                      "description": "Contacts",
+                      "x-ms-visibility": "advanced",
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
                           "Role": {
-                            "type": "string",
+                            "title": "Role",
                             "description": "The contact’s role for the specific document. Can be code or recno.",
-                            "title": "Role"
+                            "type": "string"
                           },
                           "ReferenceNumber": {
-                            "type": "string",
+                            "title": "Reference Number",
                             "description": "Reference Number is the Personal Id Number for a private person and Enterprise Number for an enterprise.",
-                            "title": "Reference Number"
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "AdditionalFields": {
+                      "description": "AdditionalFields",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Name": {
+                            "title": "Name",
+                            "description": "The name of the field. This name is the name in the 360° meta model (Not always the same as seen in 360° GUI.)",
+                            "type": "string"
+                          },
+                          "Value": {
+                            "title": "Value",
+                            "description": "The string value to be set in the field.",
+                            "type": "string"
                           }
                         }
                       },
-                      "description": "Contacts"
+                      "x-ms-visibility": "advanced"
                     }
-                  },
-                  "description": "parameter",
-                  "required": [
-                    "CaseNumber",
-                    "Category",
-                    "Status",
-                    "Title"
-                  ]
+                  }
                 }
-              },
-              "required": [
-                "parameter"
-              ]
+              }
             }
           }
         ],
@@ -266,25 +307,25 @@
               "type": "object",
               "properties": {
                 "Recno": {
-                  "type": "integer",
                   "format": "int32",
-                  "description": "Recno"
+                  "description": "Recno",
+                  "type": "integer"
                 },
                 "DocumentNumber": {
-                  "type": "string",
-                  "description": "DocumentNumber"
+                  "description": "DocumentNumber",
+                  "type": "string"
                 },
                 "Successful": {
-                  "type": "boolean",
-                  "description": "Successful"
+                  "description": "Successful",
+                  "type": "boolean"
                 },
                 "ErrorMessage": {
-                  "type": "string",
-                  "description": "ErrorMessage"
+                  "description": "ErrorMessage",
+                  "type": "string"
                 },
                 "ErrorDetails": {
-                  "type": "string",
-                  "description": "ErrorDetails"
+                  "description": "ErrorDetails",
+                  "type": "string"
                 }
               }
             }
@@ -295,77 +336,120 @@
           "502": {
             "description": "Bad Gateway"
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     },
-    "/Biz/v2/api/call/SI.Data.RPC/SI.Data.RPC/CaseService/CreateCase": {
+	"/Biz/v2/api/call/SI.Data.RPC/SI.Data.RPC/CaseService/CreateCase": {
       "post": {
         "summary": "Create Case",
         "description": "This operation is used to create a case in Public 360.",
         "operationId": "CreateCase",
+        "consumes": [
+          "*/*"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "hosturl",
             "in": "query",
+            "name": "hosturl",
+            "description": "Host URL to point to the public 360 solution.",
             "required": true,
             "type": "string",
-            "description": "Host URL to point to the public 360 solution.",
             "x-ms-summary": "Host URL"
           },
           {
-            "name": "body",
             "in": "body",
+            "name": "body",
             "required": true,
             "schema": {
+              "required": [
+                "parameter"
+              ],
               "type": "object",
               "properties": {
                 "parameter": {
-                  "type": "object",
-                  "properties": {
-                    "Title": {
-                      "type": "string",
-                      "description": "Title for the case.",
-                      "title": "Title"
-                    },
-                    "CaseType": {
-                      "type": "string",
-                      "description": "Code or recno value, for instance “Case” or “recno:2”. Refers to the Case type code table. Default value is recno:2.",
-                      "title": "Case Type",
-                      "default": "recno:2"
-                    },
-                    "ResponsiblePersonRecno": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Refers to a valid contact recno.",
-                      "title": "Responsible Person Recno"
-                    },
-                    "ResponsibleEnterpriseRecno": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Looks up enterprise based on recno. Must be recno of a valid enterprise.",
-                      "title": "Responsible Enterprise Recno"
-                    },
-                    "DefaultValueSet": {
-                      "type": "string",
-                      "description": "Set of defined values for Case entities which are used to create case with those values as default if not passed",
-                      "title": "Default Value Set"
-                    },
-                    "ProgressPlanId": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Progress Plan Id to connect a case to a progress plan. The Progress Plan Id can be a recno, workunit id or description.",
-                      "title": "Progress Plan Id"
-                    }
-                  },
                   "description": "parameter",
                   "required": [
                     "Title"
-                  ]
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "Title": {
+                      "title": "Title",
+                      "description": "Title for the case.",
+                      "type": "string"
+                    },
+                    "DefaultValueSet": {
+                      "title": "Default Value Set",
+                      "description": "Set of defined values for Case entities which are used to create case with those values as default if not passed.",
+                      "type": "string",
+                      "x-ms-visibility": "important"
+                    },
+                    "UnofficialTitle": {
+                      "title": "Unofficial title",
+                      "description": "Unofficial title for the case.",
+                      "type": "string",
+                      "x-ms-visibility": "advanced"
+                    },
+                    "CaseType": {
+                      "title": "Case Type",
+                      "description": "Code or recno value, for instance “Case” or “recno:2”. Refers to the Case type code table.",
+                      "type": "string",
+                      "x-ms-visibility": "advanced"
+                    },
+                    "ResponsiblePersonEmail": {
+                      "title": "Responsible person email",
+                      "description": "Responsible person for the case.",
+                      "type": "string",
+                      "x-ms-visibility": "advanced"
+                    },
+                    "ResponsiblePersonRecno": {
+                      "format": "int32",
+                      "title": "Responsible Person Recno.",
+                      "description": "Refers to a valid contact recno. Alternative to Responsible person email.",
+                      "type": "integer",
+                      "x-ms-visibility": "advanced"
+                    },
+                    "ResponsibleEnterpriseRecno": {
+                      "format": "int32",
+                      "title": "Responsible Enterprise Recno.",
+                      "description": "Looks up enterprise based on recno. Alternative to Responsible person email and recno.",
+                      "type": "integer",
+                      "x-ms-visibility": "advanced"
+                    },
+                    "ProgressPlanId": {
+                      "format": "int32",
+                      "title": "Progress Plan Id",
+                      "description": "Progress Plan Id to connect a case to a progress plan. The Progress Plan Id can be a recno, workunit id or description.",
+                      "type": "integer",
+                      "x-ms-visibility": "advanced"
+                    },
+                    "AdditionalFields": {
+                      "description": "AdditionalFields",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Name": {
+                            "title": "Name",
+                            "description": "The name of the field. This name is the name in the 360° meta model (Not always the same as seen in 360° GUI.)",
+                            "type": "string"
+                          },
+                          "Value": {
+                            "title": "Value",
+                            "description": "The string value to be set in the field.",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "x-ms-visibility": "advanced"
+                    }
+                  }
                 }
-              },
-              "required": [
-                "parameter"
-              ]
+              }
             }
           }
         ],
@@ -376,25 +460,25 @@
               "type": "object",
               "properties": {
                 "Recno": {
-                  "type": "integer",
                   "format": "int32",
-                  "description": "Recno"
+                  "description": "Recno",
+                  "type": "integer"
                 },
                 "CaseNumber": {
-                  "type": "string",
-                  "description": "CaseNumber"
+                  "description": "CaseNumber",
+                  "type": "string"
                 },
                 "Successful": {
-                  "type": "boolean",
-                  "description": "Successful"
+                  "description": "Successful",
+                  "type": "boolean"
                 },
                 "ErrorMessage": {
-                  "type": "string",
-                  "description": "ErrorMessage"
+                  "description": "ErrorMessage",
+                  "type": "string"
                 },
                 "ErrorDetails": {
-                  "type": "string",
-                  "description": "ErrorDetails"
+                  "description": "ErrorDetails",
+                  "type": "string"
                 }
               }
             }
@@ -405,7 +489,8 @@
           "502": {
             "description": "Bad Gateway"
           }
-        }
+        },
+        "x-codegen-request-body-name": "body"
       }
     }
   },
